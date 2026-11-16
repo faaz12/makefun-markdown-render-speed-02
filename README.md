@@ -4,15 +4,15 @@
 [![rank](https://make.fun/badge/markdown-render-speed-02/faaz12/makefun-markdown-render-speed-02/rank.svg)](https://make.fun/bounty/markdown-render-speed-02/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=markdown-render-speed-02)
 [![reward](https://make.fun/badge/markdown-render-speed-02/faaz12/makefun-markdown-render-speed-02/reward.svg)](https://make.fun/bounty/markdown-render-speed-02?utm_source=github&utm_medium=readme&utm_campaign=markdown-render-speed-02)
 
-A zero-dependency Markdown renderer in plain JavaScript, covering CommonMark 0.31.2 plus GitHub-flavored extensions. It matches marked 18.1.3's default output on all 720 practice cases and renders them faster than marked does.
+A dependency-free Markdown renderer written in plain JavaScript. It covers CommonMark 0.31.2 and the GitHub-flavored extensions, produces exactly the HTML that marked 18.1.3 gives with its default options, and does it faster than marked on all 720 practice cases.
 
-## Run it
+## Running it
 
 ```sh
 node main.ts
 ```
 
-This reads `/input/cases.json` and writes the rendered HTML array to `/output/html.json`. Set `MAKEFUN_INPUT_DIR` and `MAKEFUN_OUTPUT_DIR` to point it elsewhere.
+That reads `/input/cases.json` and writes the array of rendered HTML strings to `/output/html.json`. Point `MAKEFUN_INPUT_DIR` and `MAKEFUN_OUTPUT_DIR` somewhere else to run it against a different case set or output folder.
 
 ---
 

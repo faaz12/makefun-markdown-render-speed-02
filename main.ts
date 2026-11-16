@@ -1,22 +1,23 @@
-// Runner for the markdown-render-speed-02 entry on make.fun.
+// Driver for the markdown-render-speed-02 entry.
 //
-// The grader invokes `node /bot/main.ts` under Node 22. It drops the
-// cases at /input/cases.json — a JSON array whose items look like
-// { id, markdown } — and reads back /output/html.json, a JSON array
-// of rendered HTML strings in exactly the same order. When the two
-// MAKEFUN_* environment variables are set they take over from the
-// /input and /output defaults, which is handy for local runs.
+// The harness runs `node /bot/main.ts` on Node 22. It places the case
+// set at /input/cases.json — a JSON array of { id, markdown } objects —
+// and expects the rendered HTML back in /output/html.json as a JSON
+// array of strings, in the same order as the cases. The two
+// MAKEFUN_* variables let a local run point the driver at different
+// input and output directories instead of the /input and /output
+// defaults used by the grader.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { parse } from './parse.js';
 
-const inDir = process.env.MAKEFUN_INPUT_DIR ?? '/input';
-const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+const inputDir = process.env.MAKEFUN_INPUT_DIR ?? '/input';
+const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
-const suite = JSON.parse(readFileSync(join(inDir, 'cases.json'), 'utf8'));
+const cases = JSON.parse(readFileSync(join(inputDir, 'cases.json'), 'utf8'));
 
-const rendered = suite.map((c) => parse(c.markdown));
+const html = cases.map((entry) => parse(entry.markdown));
 
-mkdirSync(outDir, { recursive: true });
-writeFileSync(join(outDir, 'html.json'), JSON.stringify(rendered));
+mkdirSync(outputDir, { recursive: true });
+writeFileSync(join(outputDir, 'html.json'), JSON.stringify(html));
