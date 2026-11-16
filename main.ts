@@ -1,14 +1,15 @@
-// Entry point for the markdown-render-speed-02 submission.
+// Driver for the markdown-render-speed-02 entry.
 //
-// The grader invokes `node /bot/main.ts` under Node 22. It mounts the
-// case set at /input/cases.json — an array of { id, markdown } entries —
-// and collects the rendered HTML from /output/html.json, one string per
-// case, in the same order. This driver just wires those two files
-// together through parse() from ./parse.js.
+// The harness runs `node /bot/main.ts` on Node 22. It places the case
+// set at /input/cases.json — a JSON array of { id, markdown } objects —
+// and expects the rendered HTML at /output/html.json, one string per
+// case, in the same order as the input. This file only connects those
+// two ends: it reads the cases, hands each markdown string to parse()
+// from ./parse.js, and writes the results out.
 //
-// For a local run, MAKEFUN_INPUT_DIR and MAKEFUN_OUTPUT_DIR can point
-// the driver at a different input folder and output folder; otherwise
-// it uses the /input and /output paths the grader provides.
+// For a local check, MAKEFUN_INPUT_DIR and MAKEFUN_OUTPUT_DIR can
+// redirect the driver to a different input folder and output folder;
+// without them it uses the /input and /output paths the grader mounts.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';

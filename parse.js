@@ -1,14 +1,15 @@
-// parse.js — a fast CommonMark 0.31.2 + GFM renderer, written from scratch.
+// parse.js — a fast CommonMark 0.31.2 + GFM renderer, written by hand.
 //
-// parse(markdown) returns exactly the HTML that marked 18.1.3 produces
+// parse(markdown) gives back exactly the HTML marked 18.1.3 produces
 // with its default options (gfm on, breaks off, pedantic off, async off).
-// No dependencies, no I/O, no state carried from one call to the next.
+// No dependencies, no I/O, and nothing is carried from one call to the
+// next.
 //
-// How it works: the source is split into blocks by a small recursive
+// The approach: split the source into blocks with a small recursive
 // lexer (headings, fences, lists, block quotes, tables, raw HTML, ...),
-// each block's inline text is scanned into atoms (text runs, code spans,
-// links, emphasis delimiter runs, ...), delimiter runs are resolved with
-// the standard CommonMark stack algorithm, and the atoms are rendered
+// scan each block's inline text into atoms (text runs, code spans,
+// links, emphasis delimiter runs, ...), resolve the delimiter runs
+// with the standard CommonMark stack algorithm, and render the atoms
 // straight into HTML strings.
 
 const PUNCT_CHARS = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
